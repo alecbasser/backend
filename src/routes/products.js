@@ -70,6 +70,7 @@ router.get('/active', async (req, res) => {
  */
 router.post('/active', async (req, res) => {
     try {
+        console.log('📥 Recibida petición para actualizar producto activo:', req.body);
         const { productId } = req.body;
         
         if (!productId) {
@@ -89,6 +90,11 @@ router.post('/active', async (req, res) => {
         del(CACHE_KEYS.PRODUCTS);
         
         // Notificar a clientes WebSocket
+        console.log('📢 Notificando cambio de producto activo vía WebSocket:', {
+            type: 'active_product_changed',
+            product: product ? { id: product.id, name: product.name } : null
+        });
+        
         notifyWebSocketClients({
             type: 'active_product_changed',
             product
