@@ -2,6 +2,20 @@
 
 Backend Node.js para el sistema de streaming con Amazon IVS. Proporciona API REST, WebSocket para actualizaciones en tiempo real, y procesamiento de imágenes.
 
+## 📍 Ubicación del Repositorio
+
+**Ruta local:**
+```
+C:\Users\luzma\AndroidStudioProjects\live\backend
+```
+
+**Repositorio remoto:**
+```
+https://github.com/alecbasser/backend.git
+```
+
+**Ver:** [GIT_PUSH.md](./GIT_PUSH.md) para instrucciones de push.
+
 ## Características
 
 - ✅ API REST para productos, imágenes y overlays
