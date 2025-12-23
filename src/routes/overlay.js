@@ -39,6 +39,7 @@ router.get('/config', async (req, res) => {
  */
 router.post('/set', async (req, res) => {
     try {
+        console.log('📥 Recibida petición para actualizar overlay:', req.body);
         const { imageUrl, positionX, positionY, width, height, active } = req.body;
         
         // Validar que active sea boolean
@@ -58,16 +59,23 @@ router.post('/set', async (req, res) => {
         del(CACHE_KEYS.OVERLAY_CONFIG);
         
         // Notificar a clientes WebSocket
+        const overlayData = {
+            imageUrl: isActive ? imageUrl : null,
+            positionX: positionX || 0,
+            positionY: positionY || 0,
+            width: width || 100,
+            height: height || 100,
+            active: isActive
+        };
+        
+        console.log('📢 Notificando cambio de overlay vía WebSocket:', {
+            type: 'overlay_changed',
+            overlay: overlayData
+        });
+        
         notifyWebSocketClients({
             type: 'overlay_changed',
-            overlay: {
-                imageUrl: isActive ? imageUrl : null,
-                positionX,
-                positionY,
-                width,
-                height,
-                active: isActive
-            }
+            overlay: overlayData
         });
         
         res.json({ 
@@ -89,6 +97,7 @@ router.post('/set', async (req, res) => {
  */
 router.post('/frame', async (req, res) => {
     try {
+        console.log('📥 Recibida petición para actualizar frame:', req.body);
         const { imageUrl, active } = req.body;
         
         // Validar que active sea boolean
@@ -104,12 +113,19 @@ router.post('/frame', async (req, res) => {
         del(CACHE_KEYS.OVERLAY_CONFIG);
         
         // Notificar a clientes WebSocket
+        const frameData = {
+            imageUrl: isActive ? imageUrl : null,
+            active: isActive
+        };
+        
+        console.log('📢 Notificando cambio de frame vía WebSocket:', {
+            type: 'frame_changed',
+            frame: frameData
+        });
+        
         notifyWebSocketClients({
             type: 'frame_changed',
-            frame: {
-                imageUrl: isActive ? imageUrl : null,
-                active: isActive
-            }
+            frame: frameData
         });
         
         res.json({ 
