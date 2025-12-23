@@ -1,0 +1,31 @@
+{
+  "name": "streaming-ivs-backend",
+  "version": "1.0.0",
+  "description": "Backend Node.js para streaming IVS con WebSocket y procesamiento de imágenes",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "streaming",
+    "ivs",
+    "websocket",
+    "wordpress"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ws": "^8.16.0",
+    "cors": "^2.8.5",
+    "multer": "^1.4.5-lts.1",
+    "sharp": "^0.33.1",
+    "dotenv": "^16.3.1",
+    "axios": "^1.6.2",
+    "node-cache": "^5.1.2"
+  }
+}
+
